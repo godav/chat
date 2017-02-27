@@ -8,7 +8,7 @@ var fs = require('fs');
 /*Telling Multer where to upload files*/
 var upload = multer({ dest: './views/uploads' });
 
-
+console.log('in');
 var method=routes.prototype;
 
 function routes(app,connection,sessionInfo){
@@ -89,7 +89,9 @@ function routes(app,connection,sessionInfo){
 		post to handle username availability request
 	*/
 	app.post('/check_name', function(req, res){
-		username=req.body.username;		
+                console.log('check name');
+		username=req.body.username;	
+                console.log(username);
 		var data={
 			query:"select * from users where login='"+username+"'",
 			connection:connection
@@ -105,6 +107,7 @@ function routes(app,connection,sessionInfo){
 		    		msg:false
 		    	};
 		    } 
+                    console.log(result_send);
 		    res.write(JSON.stringify(result_send));
 			res.end();
 		});
@@ -141,6 +144,8 @@ function routes(app,connection,sessionInfo){
 				sign_up_date:Math.floor(new Date() / 1000),
 				online:'Y'
 			};
+                        
+                        console.log(insert_data);
 			var data={
 				query:"INSERT INTO users SET ?",
 				connection:connection,
@@ -150,7 +155,7 @@ function routes(app,connection,sessionInfo){
 				
 				//storing session ID
 				sessionInfo.uid = result.insertId;
-
+                                console.log('query insert results',result);
 				if(result) {
 					result_send={
 			    		is_logged:true,
@@ -186,7 +191,7 @@ function routes(app,connection,sessionInfo){
 
 method.getroutes=function(){
 	return this;
-}
+};
 
 module.exports = routes;
 
@@ -212,4 +217,4 @@ var query_runner=function(data,callback){
 		  });
 		}
 	});
-}
+};

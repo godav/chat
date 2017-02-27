@@ -51,7 +51,7 @@ function routes(app,connection,io,sessionInfo){
 	    	}
 
 	    	var data={
-				query:"update user set online='Y' where id='"+userinfo.id+"'",
+				query:"update users set online='Y' where id='"+userinfo.id+"'",
 				connection:connection
 			};
 			helper.queryRunner(data,function(result){
@@ -140,7 +140,7 @@ function routes(app,connection,io,sessionInfo){
 					  	var data={
 							query:"update user set online='N' where id='"+users[i].id+"'",
 							connection:connection
-						}
+						};
 						spliceId=i;
 						helper.queryRunner(data,function(result){
 							users.splice(spliceId,1); //Removing single user
@@ -162,6 +162,7 @@ function routes(app,connection,io,sessionInfo){
 	*/
 	
 	app.get('/home',function(req, res){
+            console.log(req);
 		sessionInfo=req.session;
 		if(!sessionInfo.uid){
 			res.redirect("/");	
@@ -253,9 +254,9 @@ function routes(app,connection,io,sessionInfo){
 		var uid=sessionInfo.uid;
 		
 		var data={
-			query:"update user set online='N' where id='"+uid+"'",
+			query:"update users set online='N' where id='"+uid+"'",
 			connection:connection
-		}
+		};
 		helper.queryRunner(data,function(result){
 
 			req.session.destroy(function(err) {

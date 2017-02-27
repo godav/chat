@@ -23,7 +23,7 @@ app.factory('socket', function ($rootScope) {
 						callback.apply(socket, args);
 			  		}
 				});
-		  	})
+		  	});
 		}
   	};
 });
@@ -35,10 +35,10 @@ app.service('runajax', ['$http', function ($http) {
   this.runajax_function = function(request,callback){
 	var url=request.url;
 	var data_server=request.data_server;
-	$http.post(url,data_server).success(function(data, status, headers, config) {
+	$http.post(url,data_server).then(function(data, status, headers, config) {
 	  callback(data);
 	})
-	.error(function(){
+	.catch(function(){
 	  callback(data);
 	});
   };
@@ -93,7 +93,8 @@ $scope.self={
 				uid:uid
 			}
 		};
-		runajax.runajax_function(data,function(userdata){        
+		runajax.runajax_function(data,function(userdata){ 
+                    console.log('in user self');
 			$scope.show_userinfo=userdata;        
 			callback(userdata);
 		});

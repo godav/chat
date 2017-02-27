@@ -54,6 +54,6 @@ require('./middleware/routes.js')(app,connection,io,Session,cookieParser,session
 /*
 	Running our application  
 */
-http.listen(81,function(){
-    console.log("Listening on http://127.0.0.1:81");
+http.listen(3000,function(){
+    console.log("Listening on http://127.0.0.1:3000");
 });

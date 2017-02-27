@@ -57,14 +57,14 @@ app.controller('login-register', function ($scope,$http,$timeout,$window) {
             password:$scope.password
         };
 
-        $http.post('/login',data).success(function(data, status, headers, config) {
-            if(data.is_logged){
+        $http.post('/login',data).then(function(response) {
+            if(response.data.is_logged){
                 $scope.LoginAlert = true;
-                $window.location.href = "/home#?id="+data.id;
+                $window.location.href = "/home#?id="+response.data.id;
             }else{
                 $scope.LoginAlert = false;
             }
-        }).error(function(data, status) {
+        }).error(function(response) {
             alert("Connection Error");
         });
     };
@@ -123,15 +123,16 @@ app.controller('login-register', function ($scope,$http,$timeout,$window) {
                 transformRequest: angular.identity,
                 headers: {'Content-Type': undefined}
             })
-            .success(function(data, status, headers, config) {
-                if(data.is_logged){
+            .then(function(response) {
+                console.log(response);
+                if(response.data.is_logged){
                     $scope.LoginAlert = true;
-                    $window.location.href = "/home#?id="+data.id;
+                    $window.location.href = "/home#?id="+response.data.id;
                 }else{
                     $scope.LoginAlert = false;
                 }
             })
-            .error(function(){
+            .catch(function(response){
                 alert("Connection Error");
             });
         }
@@ -143,13 +144,14 @@ app.controller('login-register', function ($scope,$http,$timeout,$window) {
     var etc_function={
         check_username:function(data){
             $http.post('/check_name',data)
-              .success(function(data, status, headers, config) {
-                if( !data.msg ){
+              .then(function(response) {
+                  console.log('sent');
+                if( !response.data.msg ){
                     $scope.RegisterAlert = true;
                 }else{
                     $scope.RegisterAlert = false;
                 }
-            }).error(function(data, status) {
+            }).catch(function(response) {
                 alert("Connection Error");
             });
         }
