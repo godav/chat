@@ -168,7 +168,8 @@ function routes(app,connection,io,sessionInfo){
 			res.redirect("/");	
 			res.end();	
 		}else{
-			/*res.redirect('/home#?id='+sessionInfo.uid);*/
+                    console.log('enter to else');
+//			res.redirect('/home#?id='+sessionInfo.uid);
 			res.render('home');
 			res.end();
 		}
