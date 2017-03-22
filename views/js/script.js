@@ -1,4 +1,4 @@
-var app = angular.module('login-register',[]);
+var app = angular.module('app');
 
 /*creating Directive to Upload file starts*/
 app.directive('fileModel', ['$parse', function ($parse) {
@@ -23,7 +23,7 @@ app.directive('fileModel', ['$parse', function ($parse) {
 }]);
 /*creating Directive to Upload file ends*/
 
-app.controller('login-register', function ($scope,$http,$timeout,$window) {    
+app.controller('login-register', function ($scope,$http,$timeout,$window,$location) {    
     
     /* variables for  Hide show starts*/
     $scope.LoginBox=false; 
@@ -124,10 +124,12 @@ app.controller('login-register', function ($scope,$http,$timeout,$window) {
                 headers: {'Content-Type': undefined}
             })
             .then(function(response) {
-                console.log(response);
+                console.log('response');
                 if(response.data.is_logged){
+                    console.log('logged in');
                     $scope.LoginAlert = true;
-                    $window.location.href = "/home#?id="+response.data.id;
+                  //  $location.path("/home?id="+response.data.id);
+                    $window.location.href = "/home?id="+response.data.id;
                 }else{
                     $scope.LoginAlert = false;
                 }

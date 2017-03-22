@@ -162,14 +162,20 @@ function routes(app,connection,io,sessionInfo){
 	*/
 	
 	app.get('/home',function(req, res){
-            console.log(req);
+//            console.log(req);
 		sessionInfo=req.session;
 		if(!sessionInfo.uid){
 			res.redirect("/");	
 			res.end();	
 		}else{
                     console.log('enter to else');
-//			res.redirect('/home#?id='+sessionInfo.uid);
+                 
+//			res.redirect('/home?id='+sessionInfo.uid);
+//                    const path = require('path');
+//                    test = path.join(__dirname, '..', 'views','home.html');
+//                        console.log(test);
+//                        console.log(req.params);
+//                        res.sendFile(test);
 			res.render('home');
 			res.end();
 		}

@@ -25,7 +25,7 @@ function routes(app,connection,sessionInfo){
 		sessionInfo=req.session;
 		/*Render Login page If session is not set*/
 		if(sessionInfo.uid){
-			res.redirect('/home#?id='+sessionInfo.uid);
+			res.redirect('/home?id='+sessionInfo.uid);
 		}else{
 			res.render("login");		
 		}
@@ -91,7 +91,7 @@ function routes(app,connection,sessionInfo){
 	app.post('/check_name', function(req, res){
                 console.log('check name');
 		username=req.body.username;	
-                console.log(username);
+//                console.log(username);
 		var data={
 			query:"select * from users where login='"+username+"'",
 			connection:connection
@@ -107,7 +107,7 @@ function routes(app,connection,sessionInfo){
 		    		msg:false
 		    	};
 		    } 
-                    console.log(result_send);
+//                    console.log(result_send);
 		    res.write(JSON.stringify(result_send));
 			res.end();
 		});
@@ -145,7 +145,7 @@ function routes(app,connection,sessionInfo){
 				online:'Y'
 			};
                         
-                        console.log(insert_data);
+//                        console.log(insert_data);
 			var data={
 				query:"INSERT INTO users SET ?",
 				connection:connection,
@@ -155,7 +155,7 @@ function routes(app,connection,sessionInfo){
 				
 				//storing session ID
 				sessionInfo.uid = result.insertId;
-                                console.log('query insert results',result);
+//                                console.log('query insert results',result);
 				if(result) {
 					result_send={
 			    		is_logged:true,

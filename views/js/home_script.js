@@ -1,4 +1,4 @@
-var app = angular.module('home',['ngAnimate', 'toaster','ngRoute']);
+var app = angular.module('app');
 
 
 /* 
@@ -167,7 +167,7 @@ $scope.self={
 */
 $scope.self.getUserInfo(function(userinfo){
     
-    console.log('userinfo',userinfo);
+//    console.log('userinfo',userinfo);
 	socket.emit('userInfo',userinfo.data); // sending user info to the server  
 });
   
@@ -176,7 +176,7 @@ $scope.self.getUserInfo(function(userinfo){
 	Function To show selected user from chat list  
 */  
 $scope.hightlight_user=function(send_to_userinfo){
-  console.log('send_to_userinfo',send_to_userinfo);
+//  console.log('send_to_userinfo',send_to_userinfo);
 	$scope.send_to_userinfo=send_to_userinfo;
 	$scope.hightlight_id=send_to_userinfo.id;
 	$scope.send_to_user_name=send_to_userinfo.name; 

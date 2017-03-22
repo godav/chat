@@ -21,7 +21,7 @@ function config(app){
 
 method.get_config=function(){
 	return this;
-}
+};
 
 module.exports = config;
 
