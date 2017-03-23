@@ -25,9 +25,10 @@ function routes(app,connection,sessionInfo){
 		sessionInfo=req.session;
 		/*Render Login page If session is not set*/
 		if(sessionInfo.uid){
-			res.redirect('/home?id='+sessionInfo.uid);
+                        res.redirect('/home?id='+sessionInfo.uid);
+			//res.redirect('/home?id='+sessionInfo.uid);
 		}else{
-			res.render("login");		
+			res.redirect('/login');		
 		}
 	});
 
